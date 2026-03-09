@@ -16,7 +16,7 @@ application:
       backend: http://higress:8001/
 services:
   higress:
-    image: registry.lazycat.cloud/invokerlaw/higress/all-in-one:2c18b7b007a9723a
+    image: registry.lazycat.cloud/invokerlaw/higress/all-in-one:15bea94f98bb807f
     environment:
       # Higress 控制台端口
       - HIGRESS_CONSOLE_PORT=8001
