@@ -136,7 +136,11 @@ jobs:
           fi
 
           echo "Pulling official image: $SOURCE_IMAGE"
-          docker pull "$SOURCE_IMAGE"
+          if ! docker pull "$SOURCE_IMAGE"; then
+            SOURCE_IMAGE="${{ env.OFFICIAL_IMAGE_REGISTRY }}:latest"
+            echo "Versioned image missing, falling back to: $SOURCE_IMAGE"
+            docker pull "$SOURCE_IMAGE"
+          fi
           docker tag "$SOURCE_IMAGE" "$GHCR_IMAGE_WITH_V"
           docker tag "$SOURCE_IMAGE" "$GHCR_IMAGE_PLAIN"
           docker push "$GHCR_IMAGE_WITH_V"
