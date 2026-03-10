@@ -122,7 +122,8 @@ jobs:
         if: steps.check-update.outputs.update_needed == 'true'
         id: build-image
         run: |
-          LATEST_VERSION="${{ steps.get-version.outputs.latest_version }}"
+          RAW_VERSION="${{ steps.get-version.outputs.latest_version }}"
+          LATEST_VERSION="${RAW_VERSION#v}"
           GHCR_REPO=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
           SOURCE_TAG="v${LATEST_VERSION}"
           GHCR_IMAGE_WITH_V="ghcr.io/${GHCR_REPO}:${SOURCE_TAG}"
